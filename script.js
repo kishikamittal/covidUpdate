@@ -3,24 +3,27 @@ $(document).ready(function(){
     var url = "https://api.covid19india.org/data.json"
     $.getJSON(url,function(data)
     {
-        //console.log(data)
+        console.log(data)
         var total_active,total_recovered,total_deaths,total_confirmed
         var state =[]
         var confirmed= []
         var recovered =[]
         var deaths=[]
+        var active=[]
         $.each(data.statewise,function(id,obj)
         {
             state.push(obj.state)
             confirmed.push(obj.confirmed)
             recovered.push(obj.recovered)
             deaths.push(obj.deaths)
+            active.push(obj.active)
         })
         //console.log(state)
         state.shift()
         confirmed.shift()
         recovered.shift()
         deaths.shift()
+        active.shift()
        // console.log(state)
         total_active= data.statewise[0].active
         total_confirmed=data.statewise[0].confirmed
@@ -53,6 +56,13 @@ $(document).ready(function(){
                         data: deaths,
                         backgroundColor: "#e74c3c",
                         minBarLength: 100
+                    },
+                    {
+                        label: "Active Cases",
+                        data: active,
+                        backgroundColor: "#ff00ff",
+                        minBarLength: 100
+
                     },
                 ]
             },
